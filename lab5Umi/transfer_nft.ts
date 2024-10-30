@@ -8,19 +8,14 @@ export async function transferNft(
     umi: Umi,
      mintAddress : any,
      currentOwner : any,
-     
   ) {
     try {
 
-    // const mint = generateSigner(umi);
+    // my phantom address
     const newOwner =  publicKey("HcecXBVHRXrYGFKHHg33aPjuPqFN2L339nwZ28JewM9s");
-    // const newOwnerPDA = PublicKey.findProgramAddressSync(
-    //     [newOwner.toBuffer()] ,
-    //     mintAddress.publicKey 
-    //  );
 
     const tx = await transferV1(umi, {
-        mint: mintAddress,
+        mint: mintAddress.publicKey,
         authority: currentOwner,
         tokenOwner: currentOwner.publicKey,
         destinationOwner: newOwner,

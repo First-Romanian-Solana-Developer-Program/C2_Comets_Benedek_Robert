@@ -58,11 +58,11 @@ console.log("Loaded user:", user.publicKey.toBase58());
     }
     // 4. Update metadata
     const newMetadata = {...NFT_DATA , name: "ALADIN nft - updated"};
-    // await updateMetadata(umi, newMetadata, mintAddress, user);
+    await updateMetadata(umi, newMetadata, mintAddress, user);
 
-    // 5. TODO: transfer
-    console.log("Successfully transfered the nft");
-    await transferNft(umi, mintAddress, user);
+    // 5. transfer
+    await transferNft(umi, mintAddress, user);     
+
     
   } catch (error) {
     console.log(`Oops.. Something went wrong ${error}`);

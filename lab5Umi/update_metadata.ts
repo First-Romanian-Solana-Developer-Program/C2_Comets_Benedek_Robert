@@ -23,15 +23,20 @@ export async function updateMetadata(
     const initialMetadata = await fetchMetadataFromSeeds(umi, { mint:  mintAddress.publicKey })
     console.log("Initial Metadata: ", initialMetadata)
 
+    console.log("autority" , authority , "MInt addres" , mintAddress) 
     const tx = await updateV1(umi, {
     mint: mintAddress.publicKey,
     authority: authority,
-
-    data: { ...newMetadata  }, // ...initialMetadata.data
+    data: { ...initialMetadata, name: "ALADIN UPDATED"   }, // ...initialMetadata.data
     }).sendAndConfirm(umi)
 
-    console.log("Updated Metadata: ", tx)
-} catch (error) {
+
+    const signature = base58.encode(tx.signature);
+  
+    let explorerLink = getExplorerLink("tx", signature, "devnet");
+    console.log(`Succesfully Updated metadata! Check out your TX here:\n${explorerLink}`);
+  
+  } catch (error) {
     console.log("Oops.. Something went wrong with updating the metadata", error);
   }
 }
