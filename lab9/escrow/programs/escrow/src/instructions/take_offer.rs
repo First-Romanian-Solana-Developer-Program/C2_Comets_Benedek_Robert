@@ -50,7 +50,7 @@ pub struct TakeOffer<'info> {
     bump = offer.bump
     )]
     offer: Account<'info, Offer>,
-    [account(
+    #[account(
         mut,
         associated_token::mint = token_mint_a,
         associated_token::authority = offer,

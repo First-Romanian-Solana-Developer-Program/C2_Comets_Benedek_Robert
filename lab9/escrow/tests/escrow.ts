@@ -211,39 +211,39 @@ describe("escrow", async () => {
   };
 
   // We'll call this function from multiple tests, so let's seperate it out
-  // const take = async () => {
-  //   const transactionSignature = await program.methods
-  //     .takeOffer()
-  //     .accounts({ ...accounts })
-  //     .signers([bob])
-  //     .rpc();
+  const take = async () => {
+    const transactionSignature = await program.methods
+      .takeOffer()
+      .accounts({ ...accounts })
+      .signers([bob])
+      .rpc();
 
-  //   await confirmTransaction(connection, transactionSignature);
+    await confirmTransaction(connection, transactionSignature);
 
-  //   // Check the offered tokens are now in Bob's account
-  //   // (note: there is no before balance as Bob didn't have any offered tokens before the transaction)
-  //   const bobTokenAccountBalanceAfterResponse =
-  //     await connection.getTokenAccountBalance(accounts.takerTokenAccountA);
-  //   const bobTokenAccountBalanceAfter = new BN(
-  //     bobTokenAccountBalanceAfterResponse.value.amount
-  //   );
-  //   assert(bobTokenAccountBalanceAfter.eq(tokenAOfferedAmount));
+    // Check the offered tokens are now in Bob's account
+    // (note: there is no before balance as Bob didn't have any offered tokens before the transaction)
+    const bobTokenAccountBalanceAfterResponse =
+      await connection.getTokenAccountBalance(accounts.takerTokenAccountA);
+    const bobTokenAccountBalanceAfter = new BN(
+      bobTokenAccountBalanceAfterResponse.value.amount
+    );
+    assert(bobTokenAccountBalanceAfter.eq(tokenAOfferedAmount));
 
-  //   // Check the wanted tokens are now in Alice's account
-  //   // (note: there is no before balance as Alice didn't have any wanted tokens before the transaction)
-  //   const aliceTokenAccountBalanceAfterResponse =
-  //     await connection.getTokenAccountBalance(accounts.makerTokenAccountB);
-  //   const aliceTokenAccountBalanceAfter = new BN(
-  //     aliceTokenAccountBalanceAfterResponse.value.amount
-  //   );
-  //   assert(aliceTokenAccountBalanceAfter.eq(tokenBWantedAmount));
-  // };
+    // Check the wanted tokens are now in Alice's account
+    // (note: there is no before balance as Alice didn't have any wanted tokens before the transaction)
+    const aliceTokenAccountBalanceAfterResponse =
+      await connection.getTokenAccountBalance(accounts.makerTokenAccountB);
+    const aliceTokenAccountBalanceAfter = new BN(
+      aliceTokenAccountBalanceAfterResponse.value.amount
+    );
+    assert(aliceTokenAccountBalanceAfter.eq(tokenBWantedAmount));
+  };
 
   it("Puts the tokens Alice offers into the vault when Alice makes an offer", async () => {
     await make();
   });
 
-  // it("Puts the tokens from the vault into Bob's account, and gives Alice Bob's tokens, when Bob takes an offer", async () => {
-  //   await take();
-  // });
+  it("Puts the tokens from the vault into Bob's account, and gives Alice Bob's tokens, when Bob takes an offer", async () => {
+    await take();
+  });
 });
