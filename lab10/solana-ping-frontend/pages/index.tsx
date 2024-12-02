@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
  import { PingButton } from '../components/PingButton'
 import Head from 'next/head'
 import { WalletContextProvider } from '../components/WalletContextProvider'
+import { SendSolanaForm } from '../components/SendSolForm'
 
 const Home: NextPage = (props) => {
 
@@ -18,8 +19,9 @@ const Home: NextPage = (props) => {
       </Head>
       <WalletContextProvider>
         <AppBar />
+           
            <PingButton />
-            
+           <SendSolanaForm />  
        </WalletContextProvider >
     </div>
   );
